@@ -47,7 +47,7 @@ map <C-b> <LEADER>be
 map <C-v> :YRShow<CR>
 
 " set colorsheme
-colorscheme xoria256
+colorscheme railscasts
 
 " most used options
 set number
