@@ -10,7 +10,7 @@ autocmd WinLeave * setlocal nocursorline
 autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 autocmd BufAdd * silent! lcd %:p:h:gs/ /\\ /
 
-" obsługa SVN
+" simple svn 
 map <Leader>svs :! svn status<CR>
 nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
 
@@ -19,7 +19,6 @@ map sv i/**   */<ESC>v=lllli
 map sc I<Home>//<ESC>j
 map scpu ipublic function () {<CR><CR>}<ESC>kk$hhh<ESC>i
 map scpr iprivate function _() {<CR><CR>}<ESC>k<Home>vj<End>=<ESC>i
-
 " single 'quote' a word
 nnoremap sq :silent! normal mpea'<Esc>bi'<Esc>`pl
 " double "quote" a word
@@ -40,7 +39,6 @@ map g<DOWN> j10j
 map g<UP><UP> k30k
 " move down faster
 map g<DOWN><DOWN> j30j
-
 " open file tree
 map <C-n> :NERDTreeToggle<CR>
 " show open buffers
