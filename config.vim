@@ -6,7 +6,7 @@ set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
-" zmiana bieżącego katalogu na katalog otwieranego pliku
+" change current directory to file's directory 
 autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 autocmd BufAdd * silent! lcd %:p:h:gs/ /\\ /
 
