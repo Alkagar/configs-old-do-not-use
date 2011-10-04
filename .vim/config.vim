@@ -13,6 +13,7 @@ autocmd BufAdd * silent! lcd %:p:h:gs/ /\\ /
 " simple svn 
 map <Leader>svs :! svn status<CR>
 nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
+nnoremap <Leader>svr :! svn revert <c-r><c-a> 
 
 " ## MAPS
 map sv i/**   */<ESC>v=lllli
