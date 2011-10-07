@@ -92,3 +92,6 @@ let NERDTreeShowBookmarks=1
 let NERDTreeShowLineNumbers=1
 let NERDTreeWinSize=250
 
+" set backup solution
+set backupdir=~/.vim/backup/
+set directory=~/.vim/backup/
