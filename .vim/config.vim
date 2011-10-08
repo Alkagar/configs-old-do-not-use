@@ -2,9 +2,11 @@
 set t_Co=256
 
 " highlighting the line with cursor
-set cursorline
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
+set nocursorline
+set nocursorcolumn
+"set cursorline "this one slow down vim with syntax highlightning
+"autocmd WinEnter * setlocal cursorline
+"autocmd WinLeave * setlocal nocursorline
 
 " change current directory to file's directory 
 autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
