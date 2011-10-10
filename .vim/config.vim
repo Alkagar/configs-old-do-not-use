@@ -97,3 +97,7 @@ let NERDTreeWinSize=250
 " set backup solution
 set backupdir=~/.vim/backup/
 set directory=~/.vim/backup/
+
+" speed vim up
+let loaded_matchparen = 1
+let synmaxcol = 1000
