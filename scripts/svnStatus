@@ -1,0 +1,16 @@
+#!/bin/bash
+# Author: Jakub Mrowiec
+# Description: skrypt służy do sprawdzania zmian
+#               
+
+# set config path
+CONFPATH=`dirname "$BASH_SOURCE"`
+
+# include config
+source $CONFPATH"/project.conf"
+
+# load all files to show status
+svn status $SVNPATH | grep '^[?M].*' | grep -v .*fileToExclude.* | awk '{print $2}' > $PROJECT"/svnFiles"
+
+# open file to show all changes
+vi $PROJECT"/svnFiles"

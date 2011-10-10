@@ -1,0 +1,59 @@
+#!/bin/bash
+# Author: Jakub Mrowiec
+# Description: send one file to remote server
+#               
+
+# set config path
+CONFPATH=`dirname "$BASH_SOURCE"`
+
+# include config
+source $CONFPATH"/serversConfig.conf"
+source $CONFPATH"/project.conf"
+
+# first argument is filename to send 
+FILE=$1
+if [ "$FILE" == "" ];
+then
+    echo 'No file to send!'
+    exit 2;
+fi
+
+# second argument is server to send
+SERVER=$(eval "echo \${$(echo $2_SERVER)}")
+if [ "$SERVER" == "" ]; 
+then
+      echo 'no server defined'
+      exit 1;
+fi
+echo 'Sending to server:' $USER'@'$SERVER
+
+# third argument is flag if you want to sync directory structure 
+SYNCDIR=$3
+if [ "$SYNCDIR" == "" ];
+then    
+    echo  'Directories will not be synchronized';
+    SYNCDIR='FALSE'
+fi
+
+# geting directories
+SRVPATH=("$(eval "echo \${$(echo $2[@])}")")
+SRVPATH=($SRVPATH)
+
+for HOMEPATHKEY in "${!HOMEPATH[@]}"
+do
+    if [[ "${FILE}" =~ ^${HOMEPATH[$HOMEPATHKEY]}.* ]]
+        then
+             REMOTEFILE=${FILE/${HOMEPATH[$HOMEPATHKEY]}/${SRVPATH[$HOMEPATHKEY]}}
+        fi
+done
+
+# if sync is on then: 
+if [ "$SYNCDIR" == "TRUE" ];
+then
+    for K in "${!SRVPATH[@]}"
+    do
+        rsync -rv --exclude=.svn --progress -f"+ */" -f"- *" ${HOMEPATH[$K]}/* $USER@$SERVER:${SRVPATH[$K]}
+    done
+fi
+# send file to server
+rsync -rv --progress ${FILE} $USER@$SERVER:${REMOTEFILE}

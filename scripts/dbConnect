@@ -1,0 +1,13 @@
+#!/bin/bash
+# Author: Jakub Mrowiec
+# Description: script to connect to database
+#               
+
+# set config path
+CONFPATH=`dirname "$BASH_SOURCE"`
+
+# include config
+source $CONFPATH"/project.conf"
+
+# connect to database
+mysql "-u${DBUSER}" "-p${DBPASSWORD}" "${DBDATABASE}" --default-character-set=utf8

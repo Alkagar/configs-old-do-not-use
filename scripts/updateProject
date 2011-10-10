@@ -1,0 +1,25 @@
+#!/bin/bash
+# Author: Jakub Mrowiec
+# Description: update cscope file for vim tags
+#               
+
+# set config path
+CONFPATH=`dirname "$BASH_SOURCE"`
+
+# include config
+source $CONFPATH"/project.conf"
+
+# remove old files
+rm $PROJECT"/cscope.in.out"
+rm $PROJECT"/cscope.out"
+rm $PROJECT"/cscope.po.out"
+rm $PROJECT"/project.files"
+
+# load file to include to creating tags
+find $SVNPATH -type f -name '*.php' -o -name '*.phtml' -o -name '*.ini'  -not \( -name .svn -prune \) > $PROJECT"/project.files"
+
+# change dir to create tags file 
+cd $PROJECT
+
+# create tag files
+cscope -b -q -k -i $PROJECT"/project.files"

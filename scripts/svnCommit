@@ -1,0 +1,35 @@
+#!/bin/bash
+# Author: Jakub Mrowiec
+# Description: commit files to repository, exclude defined files
+#               
+
+# set config path
+CONFPATH=`dirname "$BASH_SOURCE"`
+
+#include config
+source $CONFPATH"/project.conf"
+
+# load all files to commit 
+svn status $SVNPATH | grep -v .*filesPatternToExclude.* | awk '{print $2}' > $PROJECT"/svnFiles"
+
+# open file to manage files to commit to repository
+vi $PROJECT"/svnFiles"
+
+# count files to add, if none selected then end script without adding to repository
+LINES=`wc -l $PROJECT"/svnFiles" | awk '{print $1}'`
+if [ $LINES -gt 0 ] 
+then
+    echo "selected "$LINES" files to add"
+else
+    echo "there are no files to commit "
+    exit 2
+fi
+
+# move to repository directory
+cd $SVNPATH
+
+# commit files from file to repository
+svn commit --targets $PROJECT"/svnFiles"
+
+# archive files to commit 
+mv $PROJECT"/svnFiles" $PROJECT"/lastCommit"

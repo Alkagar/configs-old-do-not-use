@@ -1,1 +1,7 @@
 Alkagar's config files
+
+
+## add this to ~/.bash_specific to have working cstags in project
+
+CSCOPE_DB="/path/to/file/cscope.out"
+export CSCOPE_DB
