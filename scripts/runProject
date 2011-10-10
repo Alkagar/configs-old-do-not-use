@@ -1,1 +1,12 @@
-vim "+lcd /path/to/repository/" "+NERDTree"
+#!/bin/bash
+# Author: Jakub Mrowiec
+# Description: script to open vim in project mode
+#               
+
+# set config path
+CONFPATH=`dirname "$BASH_SOURCE"`
+
+# include config
+source $CONFPATH"/project.conf"
+
+vim "+lcd $SVNPATH" "+NERDTree"

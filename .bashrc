@@ -10,8 +10,5 @@ fi
 # prompt
 PS1='[\e[0;33m \u\e[m@\e[1;36m\H\e[m ] : '
 
-# additional paths
-# UJ
-PATH=$PATH":/root/projekty/erk/bin:/root/scripts";
 # MAWA
 PATH=$PATH:/usr/local/mysql/bin:/usr/local/apache2/bin:/root/projekty/mawa/bin
