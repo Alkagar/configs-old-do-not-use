@@ -47,7 +47,7 @@ map <C-n> :NERDTreeToggle<CR>
 " show open buffers
 map <C-b> <LEADER>be
 " show copy/paste history
-map <C-w> :YRShow<CR>
+map <C-l> :YRShow<CR>
 
 " set colorsheme
 colorscheme railscasts
