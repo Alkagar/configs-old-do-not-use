@@ -49,6 +49,8 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-b> <LEADER>be
 " show copy/paste history
 map <C-l> :YRShow<CR>
+" copy word under cursor
+map <A-w> byw 
 
 " set colorsheme
 colorscheme railscasts
