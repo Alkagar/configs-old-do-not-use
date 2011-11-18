@@ -49,8 +49,12 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-b> <LEADER>be
 " show copy/paste history
 map <C-l> :YRShow<CR>
-" copy word under cursor
-map <A-w> byw 
+"change panel size
+map <S-up> <C-w>1+
+map <S-down> <C-w>1-
+map <S-left> <C-w>1<
+map <S-right> <C-w>1>
+
 
 " set colorsheme
 colorscheme railscasts
