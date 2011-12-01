@@ -1,4 +1,4 @@
-let cscopeFile = "/home/alkagar/projects/erk/cscope.out"
+let cscopeFile="/home/alkagar/projects/erk/cscope.out"
 
 if filereadable(cscopeFile)
     execute ":cscope add " . cscopeFile

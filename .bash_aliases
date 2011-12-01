@@ -1,2 +1,2 @@
-alias la='ls -lah'
+alias la='ls -lah color=auto'
 alias tmux='tmux -u2'
