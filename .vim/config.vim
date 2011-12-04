@@ -90,10 +90,10 @@ syntax enable
 au FileType php set omnifunc=phpcomplete#CompletePHP
 
 " YankRing setting's
-let g:yankring_min_element_length = 2
+let g:yankring_min_element_length = 5 
 let g:yankring_enabled = 1
-let g:yankring_window_use_horiz = 0  " yang ring on right site
-let g:yankring_window_width = 100 " set yangring width
+let g:yankring_window_use_horiz = 0  " yankring on right site
+let g:yankring_window_width = 100 " set yankring width
 
 " NERDTree setting's
 let NERDTreeQuitOnOpen=1           
