@@ -8,7 +8,7 @@ if [ -f ~/.bash_specific ]; then
 fi
 
 # prompt
-PS1='[\e[0;33m\] \u\e[m\]@\e[1;36m\]\H\e[m\] ] : '
+#PS1='[\e[0;33m\] \u\e[m\]@\e[1;36m\]\H\e[m\] ] : '
 
 
 #aliases
