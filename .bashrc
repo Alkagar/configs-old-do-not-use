@@ -9,8 +9,3 @@ fi
 
 # prompt
 PS1='[ \[\e[1;31m\]\u\[\e[0m\] @ \[\e[1;33m\]\h\[\e[0m\] ] :  '
-
-
-#aliases
-alias ls="ls -l --color=auto"
-alias grep="grep --color=auto"
