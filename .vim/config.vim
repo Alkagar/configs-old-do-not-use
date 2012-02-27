@@ -18,6 +18,9 @@ nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
 nnoremap <Leader>svr :! svn revert <c-r><c-a> 
 nnoremap <Leader>svu :! uploadFile <c-r><c-a> 
 
+autocmd FileType php noremap <C-M> :w!<CR>:!php5 %<CR>
+autocmd FileType php noremap <C-J> :!php5 -l %<CR>
+
 " ## MAPS
 map sv i/**   */<ESC>v=lllli
 map sc I<Home>//<ESC>j
