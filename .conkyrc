@@ -1,0 +1,125 @@
+#==============================================================================
+#                                 DebConky
+#
+#  author  : Andrez
+#  version : 1.1
+#  license : Distributed under the terms of GNU GPL 
+#
+#==============================================================================
+
+######################
+# - Conky settings - #
+######################
+
+update_interval 1
+net_avg_samples 2
+cpu_avg_samples 2
+
+double_buffer yes
+no_buffers yes
+
+#####################
+# - Text settings - #
+#####################
+
+use_xft yes
+xftfont caviar dreams:size=8
+override_utf8_locale yes
+text_buffer_size 2048
+
+xftalpha 0.5
+uppercase no
+
+#############################
+# - Window specifications - #
+#############################
+
+own_window_class Conky
+own_window yes
+own_window_type normal
+own_window_argb_visual yes
+own_window_argb_value 180
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+
+alignment tr
+gap_x 10
+gap_y 30
+minimum_size 900 450
+maximum_width 280
+
+#########################
+# - Graphics settings - #
+#########################
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+default_color FFFFFF
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+color4 666666
+
+################
+# - lua Load - #
+################
+
+
+lua_load ~/.conky/clock_rings.lua
+lua_draw_hook_pre clock_rings
+
+################
+# -   TEXT   - #
+################
+
+TEXT
+${voffset 150}
+${image ~/.conky/debian.png -p 120,120 -s 64x64}
+${voffset 30}
+${goto 120}${color4}${font ubuntu:size=12}${time %e} ${color1}${font ubuntu:size=10}${time %A}
+${goto 140}${color2}${font ubuntu:size=9}${time %b} ${color3}${font ubuntu:size=10}${time %Y}
+
+${voffset 10}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}CPU
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}${top name 1}${goto 200}${top cpu 1}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}${top name 2}${goto 200}${top cpu 2}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color3}${top name 3}${goto 200}${top cpu 3}%
+${goto 90}${voffset 0}${font Ubuntu:size=7,weight:normal}${color}${threads} process 
+
+${voffset 15}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}MEM
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}${top_mem name 1}${goto 200}${top_mem mem 1}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}${top_mem name 2}${goto 200}${top_mem mem 2}%
+${goto 90}${font Ubuntu:size=7,weight:normal}${color3}${top_mem name 3}${goto 200}${top_mem mem 3}%
+
+${voffset 30}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}DISKS
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}root${goto 200} ${fs_used /} used
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}home${goto 200} ${fs_used /home} used
+#${goto 90}${diskiograph 30,100 666666 666666}${voffset 30}
+
+${voffset 40}
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}NET
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}Bitrate${goto 200}${wireless_bitrate wlan0} 
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}Dspeed${goto 200}${downspeedf wlan0} Kb/s
+${goto 90}${font Ubuntu:size=7,weight:normal}${color3}Uspeed${goto 200}${upspeedf wlan0}  Kb/s
+
+
+${goto 90}${font Ubuntu:size=7,weight:bold}${color}INBOX
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}Gmail ${goto 200} ${texeci 180 python ~/.conky/gmail.py}
+
+
+${if_running rhythmbox}${goto 90}${font Ubuntu:size=7,weight:bold}${color}MUSIC
+${goto 90}${font Ubuntu:size=7,weight:normal}${color1}Artist${goto 200}${exec rhythmbox-client --no-start --print-playing-format %ta}
+${goto 90}${font Ubuntu:size=7,weight:normal}${color2}Title${goto 200}${exec rhythmbox-client --print-playing-format %tt}
+#${goto 90}${font Ubuntu:size=7,weight:normal}${color2}Album${goto 200}${exec rhythmbox-client --no-start --print-playing-format %at}
+${goto 90}${font Ubuntu:size=7,weight:normal}${color3}Position${goto 200}${exec rhythmbox-client --no-start --print-playing-format %te}
+${goto 90}${font Ubuntu:size=7,weight:normal}${color4}Length${goto 200}${exec rhythmbox-client --no-start --print-playing-format %td}
+${endif}
+
+
+
