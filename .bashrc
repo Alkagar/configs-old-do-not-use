@@ -7,7 +7,8 @@ if [ -f ~/.bash_specific ]; then
     . ~/.bash_specific
 fi
 
-
+export LC_CTYPE=pl_PL.UTF-8
+export LANGUAGE=pl_PL
 
 
 #defined colors
