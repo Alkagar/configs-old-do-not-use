@@ -3,3 +3,6 @@ find . -type d -not -iwholename '*.svn*' -print0 | xargs -0 chmod 775
 
 # zmiana praw dla plików bez svn'a w jakiejs strukturze
 find . -type f -not -iwholename '*.svn*' -print0 | xargs -0 chmod 664
+
+# unity setting, save to file 'unity.settings'
+gsettings set com.canonical.unity.panel systray-whitelist "['all']"
