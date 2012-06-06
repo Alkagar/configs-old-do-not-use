@@ -18,7 +18,7 @@ nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
 nnoremap <Leader>svr :! svn revert <c-r><c-a> 
 nnoremap <Leader>svu :! uploadFile <c-r><c-a> 
 
-autocmd FileType php noremap <C-M> :w!<CR>:!php5 %<CR>
+autocmd FileType php noremap <C-H> :w!<CR> :!php5 %<CR>
 autocmd FileType php noremap <C-J> :!php5 -l %<CR>
 
 " ## MAPS
@@ -38,14 +38,6 @@ nnoremap sdall <ESC>1GvG$d
 map scpp :call PhpDoc()<CR>
 " indent and format file
 map sfo :!astyle %:p <CR> 
-" move up fast
-map g<UP> k10k
-" move down fast
-map g<DOWN> j10j
-" move up faster
-map g<UP><UP> k30k
-" move down faster
-map g<DOWN><DOWN> j30j
 " open file tree
 map <C-n> :NERDTreeToggle<CR>
 " show open buffers
