@@ -33,3 +33,5 @@ PS1="${greenStart} in [ \w ] ${noStart} \n[ ${redStart}\u${noStart} @ ${yellowSt
 #Purple      0;35     Light Purple  1;35
 #Brown       0;33     Yellow        1;33
 #Light Gray  0;37     White         1;37
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
