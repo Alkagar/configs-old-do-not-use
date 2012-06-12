@@ -1,0 +1,39 @@
+
+#					previous occurrence
+*					next word occurrence
+M					middle screen
+H					hight screen
+L					low screen
+
+:%s/find/replace/gc			find and replace, global, confirm every replacement
+
+<C-l>	Yang Ring
+<C-b> 	Buffers
+<C-n> 	NERD
+
+sfo	astyle
+scpp	phpdoc
+sdall	clear file	
+su	rmove remove quotes from word
+sd 	double quote word
+sq	quote word
+
+scpu	create public function
+scpr	create private method
+sv	block comment
+
+<C-m>	php exe file
+<C-j>	php parse file
+
+<Leader>svd	svn diff
+<Leader>svr	svn revert
+<Leader>svs	svn status
+<Leader>svu	uploadFile
+
+
+
+v% 	if the cursor is on the starting/ending parenthesis
+vib 	if the cursor is inside the parenthesis block
+
+vi'	visual select text in ''
+vi"	visual select text in ""
