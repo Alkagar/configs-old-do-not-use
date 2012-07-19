@@ -43,7 +43,7 @@ map <C-n> :NERDTreeToggle<CR>
 " show open buffers
 map <C-b> <LEADER>be
 " show copy/paste history
-map <C-l> :YRShow<CR>
+"map <C-l> :YRShow<CR>
 "change panel size
 map <S-up> <C-w>1+
 map <S-down> <C-w>1-
@@ -90,16 +90,35 @@ let g:yankring_enabled = 1
 let g:yankring_window_use_horiz = 0  " yankring on right site
 let g:yankring_window_width = 100 " set yankring width
 
-" NERDTree setting's
-let NERDTreeQuitOnOpen=1           
-let NERDTreeShowBookmarks=1
-let NERDTreeShowLineNumbers=1
-let NERDTreeWinSize=250
-
-" set backup solution
+" set backup to one directory
 set backupdir=~/.vim/backup/
 set directory=~/.vim/backup/
 
 " speed vim up
 let loaded_matchparen = 1
 let synmaxcol = 1000
+
+
+
+
+" new options
+
+
+" soft wrapping text
+set wrap linebreak nolist
+" moving on wrapped lines
+vmap <C-j> gj
+vmap <C-k> gk
+vmap <C-4> g$
+vmap <C-6> g^
+vmap <C-l> l 
+vmap <C-h> h
+vmap <C-0> g^
+nmap <C-j> gj
+nmap <C-l> l 
+nmap <C-h> h
+nmap <C-k> gk
+nmap <C-4> g$
+nmap <C-6> g^
+nmap <C-0> g^
+
