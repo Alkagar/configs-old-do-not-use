@@ -22,7 +22,7 @@
         " show open buffers
         nnoremap <Leader>b :BufExplorer<CR>
         " open file explorer
-        map <Leader>f :Explore<CR>
+        map <Leader>f :e %:p:h<CR>
         " map something to closing netrw
 
         " single quote a word
@@ -70,6 +70,7 @@
 
         " Change home binding
         nmap 0 ^
+        nmap - $
     " ## END Moving around
 " ## ENDGeneral mappings
 
