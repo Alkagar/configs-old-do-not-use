@@ -37,3 +37,6 @@ vib 	if the cursor is inside the parenthesis block
 
 vi'	visual select text in ''
 vi"	visual select text in ""
+
+:g/string_to_search		show lines which conatins string_to_search
+:g/string_to_search/d		remove lines shich contains string_to_search
