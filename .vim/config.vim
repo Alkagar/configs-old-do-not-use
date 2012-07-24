@@ -1,105 +1,138 @@
-" set 256 colors in terminal for vim themes
-set t_Co=256
+" ## General settings
+    " Disabling vi-compatible mode.
+    set nocompatible
 
-" highlighting the line with cursor
-set nocursorline
-set nocursorcolumn
-"set cursorline "this one slow down vim with syntax highlightning
-"autocmd WinEnter * setlocal cursorline
-"autocmd WinLeave * setlocal nocursorline
+    " Explicitly informing that we're using 256-color terminals.
+    let &t_Co=256
 
-" change current directory to file's directory 
-autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
-autocmd BufAdd * silent! lcd %:p:h:gs/ /\\ /
+    " Speed vim up
+    let loaded_matchparen = 1
+    let synmaxcol = 1000
+    set cursorline "this one slow down vim with syntax highlightning
 
-" simple svn 
-map <Leader>svs :! svn status<CR>
-nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
-nnoremap <Leader>svr :! svn revert <c-r><c-a> 
-nnoremap <Leader>svu :! uploadFile <c-r><c-a> 
+    " Set colorsheme
+    colorscheme railscasts
+" ## END General settings
 
-autocmd FileType php noremap <C-H> :w!<CR> :!php5 %<CR>
-autocmd FileType php noremap <C-J> :!php5 -l %<CR>
+" ## General mappings
+    " ## Mapping
+        " Mapping leader to space.
+        let mapleader = " "
 
-" ## MAPS
-map sv i/**   */<ESC>v=lllli
-map sc I<Home>//<ESC>j
-map scpu ipublic function () {<CR><CR>}<ESC>kk$hhh<ESC>i
-map scpr iprivate function _() {<CR><CR>}<ESC>k<Home>vj<End>=<ESC>i
-" single 'quote' a word
-nnoremap sq :silent! normal mpea'<Esc>bi'<Esc>`pl
-" double "quote" a word
-nnoremap sd :silent! normal mpea"<Esc>bi"<Esc>`pl
-" remove quotes from a word
-nnoremap su :silent! normal mpeld bhd `ph<CR>
-" clear file
-nnoremap sdall <ESC>1GvG$d
-" create phpdoc comments
-map scpp :call PhpDoc()<CR>
-" indent and format file
-map sfo :!astyle %:p <CR> 
-" open file tree
-map <C-n> :NERDTreeToggle<CR>
-" show open buffers
-map <C-b> <LEADER>be
-" show copy/paste history
-map <C-l> :YRShow<CR>
-"change panel size
-map <S-up> <C-w>1+
-map <S-down> <C-w>1-
-map <S-left> <C-w>1<
-map <S-right> <C-w>1>
+        " show open buffers
+        nnoremap <Leader>b :BufExplorer<CR>
+        " open file explorer
+        map <Leader>f :Explore<CR>
+        " map something to closing netrw
 
+        " single quote a word
+        nnoremap <Leader>qs :silent! normal mpea'<Esc>bi'<Esc>`pl
+        " double "quote" a word
+        nnoremap <Leader>qd :silent! normal mpea"<Esc>bi"<Esc>`pl
+        " remove quotes from a word
+        nnoremap <Leader>qr :silent! normal mpeld bhd `ph<CR>
+    " ## END Mapping
+    
+    " ## PHP bindings
+        " save and execute
+        autocmd FileType php noremap <Leader>pe :w!<CR>:!php5 %:p<CR>
+        " save and check syntax
+        autocmd FileType php noremap <Leader>pp :w!<CR>:!php5 -l %<CR>
+        " create PHPdoc 
+        map <Leader>pd :call PhpDoc()<CR>
+    " ## END PHP bindings
+    "
+    " ## Moving around
+        " Moving on wrapped lines visual mode
+        vmap <C-j> gj
+        vmap <C-k> gk
+        vmap <C-4> g$
+        vmap <C-6> g^
+        vmap <C-l> l 
+        vmap <C-h> h
+        vmap <C-0> g^
 
-" set colorsheme
-colorscheme railscasts
+        " Moving on wrapped lines normal mode
+        nmap <C-j> gj
+        nmap <C-k> gk
+        nmap <C-l> l 
+        nmap <C-h> h
+        nmap <C-k> gk
+        nmap <C-4> g$
+        nmap <C-6> g^
+        nmap <C-0> g^
 
-" most used options
-set number
-set smartindent
-set autoindent
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set cinkeys=0{,0},:,0#,!,!^F
-" ignore case sensitive search 
-set ignorecase
+        " Jumping to next window with Leader.
+        nnoremap <Leader>h <C-w>h
+        nnoremap <Leader>j <C-w>j
+        nnoremap <Leader>k <C-w>k
+        nnoremap <Leader>l <C-w>l
 
-" remember opened files in session
-set viminfo^=%
+        " Change home binding
+        nmap 0 ^
+    " ## END Moving around
+" ## ENDGeneral mappings
 
+" ## IDE settings
+    " ## Settings
+        " Filetype detection, filetype plugins and indent files enabled
+        filetype plugin indent on
 
-" ## PHP IDE
+        " Turn on color syntax
+        syntax on
+        " Show line numbers
+        set number
+        " Set indentation by 4 spaces
+        set expandtab
+        set shiftwidth=4
+        set softtabstop=4
+        " Ignore case sensitive search 
+        set ignorecase
+        " Soft wrapping text
+        set wrap linebreak nolist
 
-" detect file type
-filetype on
-filetype plugin on
-" folding
-let php_folding = 2
-set foldmethod=syntax
-let php_sql_query=1                                                                                        
-let php_htmlInStrings=1
+        " Backup all files in one place
+        set backupdir=~/.vim/backup/
+        set directory=~/.vim/backup/
+    " ## END Settings
 
-syntax enable
-" enable php completition
-au FileType php set omnifunc=phpcomplete#CompletePHP
+    " ## Folding
+        " Enable folding by indent
+        set foldmethod=indent
+        " Configure folding by syntax in php file
+        let php_folding = 2 
+    " ## END Folding
+" ## END IDE
 
-" YankRing setting's
-let g:yankring_min_element_length = 5 
-let g:yankring_enabled = 1
-let g:yankring_window_use_horiz = 0  " yankring on right site
-let g:yankring_window_width = 100 " set yankring width
+" ## Plugin configuration
+    " YankRing setting's
+    let g:yankring_min_element_length = 5 
+    let g:yankring_enabled = 1
+" ## Plugin configuration
 
-" NERDTree setting's
-let NERDTreeQuitOnOpen=1           
-let NERDTreeShowBookmarks=1
-let NERDTreeShowLineNumbers=1
-let NERDTreeWinSize=250
+" ## Snippets, move to other file with all snippets
+    iabbr pufunction public function name()<CR>{<CR>}<CR> 
+    iabbr prfunction private function _name()<CR>{<CR>}<CR> 
+" ## END Snippets, move to other file with all snippets
 
-" set backup solution
-set backupdir=~/.vim/backup/
-set directory=~/.vim/backup/
+" Add to erk.vim 
+" Simple SVN bindings 
+    map <Leader>svs :! svn status<CR>
+    nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
+    nnoremap <Leader>svr :! svn revert <c-r><c-a> 
+    nnoremap <Leader>svu :! uploadFile <c-r><c-a> 
 
-" speed vim up
-let loaded_matchparen = 1
-let synmaxcol = 1000
+" ## Old config wait to be removed
+    " enable php completition
+    "au FileType php set omnifunc=phpcomplete#CompletePHP
+
+    " Remember opened files in session
+    " set viminfo^=%
+
+    " Change current directory to file's directory 
+    " autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
+    " autocmd BufAdd * silent! lcd %:p:h:gs/ /\\ /
+
+    " Disable highlighting the line with cursor to speed up vim
+    " set nocursorline
+    " set nocursorcolumn

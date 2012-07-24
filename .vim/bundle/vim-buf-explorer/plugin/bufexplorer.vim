@@ -1,7 +1,7 @@
 "==============================================================================
 "    Copyright: Copyright (C) 2001-2010 Jeff Lanzarotta
 "               Permission is hereby granted to use and distribute this code,
-"               with or without modifications, provided that this copyright
+              "with or without modifications, provided that this copyright
 "               notice is copied with it. Like anything else that's free,
 "               bufexplorer.vim is provided *as is* and comes with no
 "               warranty of any kind, either expressed or implied. In no
@@ -59,9 +59,10 @@ if maparg("<Leader>bv") =~ 'BufExplorerVerticalSplit'
   nunmap <Leader>bv
 endif
 
-nmap <script> <silent> <unique> <Leader>be :BufExplorer<CR>
-nmap <script> <silent> <unique> <Leader>bs :BufExplorerHorizontalSplit<CR>
-nmap <script> <silent> <unique> <Leader>bv :BufExplorerVerticalSplit<CR>
+" commented by Alkagar (want my own shortcuts in vimrc)
+" nmap <script> <silent> <unique> <Leader>be :BufExplorer<CR>
+" nmap <script> <silent> <unique> <Leader>bs :BufExplorerHorizontalSplit<CR>
+" nmap <script> <silent> <unique> <Leader>bv :BufExplorerVerticalSplit<CR>
 
 " Create commands {{{1
 command! BufExplorer :call StartBufExplorer(has ("gui") ? "drop" : "hide edit")
