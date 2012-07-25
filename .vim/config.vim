@@ -109,6 +109,9 @@
     " YankRing setting's
     let g:yankring_min_element_length = 5 
     let g:yankring_enabled = 1
+    " Indent-Guides
+    let g:indent_guides_start_level = 2
+    let g:indent_guides_guide_size = 1
 " ## Plugin configuration
 
 " ## Snippets, move to other file with all snippets
