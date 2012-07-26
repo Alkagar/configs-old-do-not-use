@@ -5,3 +5,5 @@
     ui = auto
 [merge]
 	tool = vimdiff
+[github]
+	user = alkagar
