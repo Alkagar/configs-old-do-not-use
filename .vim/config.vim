@@ -40,6 +40,8 @@
         autocmd FileType php noremap <Leader>pp :w!<CR>:!php5 -l %<CR>
         " create PHPdoc 
         map <Leader>pd :call PhpDoc()<CR>
+        " format php file
+        map <Leader>pf <ESC>ggvG=
     " ## END PHP bindings
     "
     " ## Moving around
