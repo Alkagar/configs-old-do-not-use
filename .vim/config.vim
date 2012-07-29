@@ -40,10 +40,20 @@
         autocmd FileType php noremap <Leader>pp :w!<CR>:!php5 -l %<CR>
         " create PHPdoc 
         map <Leader>pd :call PhpDoc()<CR>
+    " ## END PHP bindings
+    " ## Formating test
         " format php file
         map <Leader>pf <ESC>ggvG=
-    " ## END PHP bindings
-    "
+        " format with tabular
+        if exists(":Tabularize")
+            nmap <Leader>t= :Tabularize /=<CR>
+            vmap <Leader>t= :Tabularize /=<CR>
+            nmap <Leader>t: :Tabularize /:<CR>
+            vmap <Leader>t: :Tabularize /:<CR>
+            " map to set : after name
+            "vmap <Leader>: :Tabularize /:\zs<CR>
+        endif
+
     " ## Moving around
         " Moving on wrapped lines visual mode
         vmap <C-j> gj
