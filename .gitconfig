@@ -2,7 +2,7 @@
 	name = Alkagar
 	email = alkagar@gmail.com
 [color]
-    ui = auto
+        ui = auto
 [merge]
 	tool = vimdiff
 [github]
