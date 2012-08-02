@@ -94,7 +94,7 @@
         " Turn on color syntax
         syntax on
         " Show line numbers
-        set number
+        set nonumber
         " Set indentation by 4 spaces
         set expandtab
         set shiftwidth=4
