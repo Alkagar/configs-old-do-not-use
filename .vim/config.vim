@@ -8,7 +8,7 @@
     " Speed vim up
     let loaded_matchparen = 1
     let synmaxcol = 1000
-    set cursorline "this one slow down vim with syntax highlightning
+    "set cursorline "this one slow down vim with syntax highlightning
 
     " Set colorsheme
     colorscheme railscasts
