@@ -19,6 +19,11 @@
         " Mapping leader to space.
         let mapleader = " "
 
+        " Copy to system clipboard
+        vmap <F7> "+y
+        " Paste from system clipboard
+        nmap <F8> "+p
+
         " show open buffers
         nnoremap <Leader>b :BufExplorer<CR>
         " open file explorer
