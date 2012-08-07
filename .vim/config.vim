@@ -20,9 +20,9 @@
         let mapleader = " "
 
         " Copy to system clipboard
-        vmap <F7> "+y
+        vmap <F7> :!xclip -f -sel clip 
         " Paste from system clipboard
-        nmap <F8> "+p
+        nmap <F8> :r!xclip -o -sel clip 
 
         " show open buffers
         nnoremap <Leader>b :BufExplorer<CR>
