@@ -24,6 +24,8 @@
         " Paste from system clipboard
         nmap <F8> :r!xclip -o -sel clip<CR>
 
+        map <Leader>fw :%s/\s\+$//e<CR>
+
         " show open buffers
         nnoremap <Leader>b :BufExplorer<CR>
         " open file explorer
