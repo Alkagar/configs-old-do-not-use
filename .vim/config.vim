@@ -118,7 +118,8 @@
         " Enable folding by indent
         set foldmethod=indent
         " Configure folding by syntax in php file
-        let php_folding = 2 
+        " disable because it's too slow!!
+        "let php_folding = 2 
     " ## END Folding
 " ## END IDE
 
