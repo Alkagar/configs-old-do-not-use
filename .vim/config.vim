@@ -28,6 +28,8 @@
 
         " show open buffers
         nnoremap <Leader>b :BufExplorer<CR>
+        " open ctrlp
+        nnoremap <Leader>s :CtrlP<CR>
         " open file explorer
         map <Leader>f :e %:p:h<CR>
         " map something to closing netrw
