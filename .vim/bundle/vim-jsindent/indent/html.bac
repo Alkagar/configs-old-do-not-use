@@ -1,128 +1,35 @@
-" Vim indent file
-" Language:	Php
-" Authors:	Miles Lott <milos@groupwhere.org>, Johannes Zellner <johannes@zellner.org>, Pim Snel <pim@lingewoud.nl> 
-" URL:		http://lingewoud.nl/downloads.php
-" Last Change:	23 feb 2004 
-" Version:	0.3
-" Notes:  	This is a combination of the PHP indent file of Miles Lott with 
-"         	the HTML indent file of Johannes Zellner. Usefull for editing 
-"         	php-files with html parts in it. 
-"         	
-" Changelog: 
-" 			 0.3 - 25 mar 2004
-" 			 - fixed wrong indention when a php-tag is opened and closed on
-" 			   one single line.
-" 			 0.2 - 23 feb 2004
-" 			 - applied patch from Holger Dzeik <dzeik@nentec.de>
-"            - added changelog
-"            - added default indention of 3 spaces after the <?php for better
-"              reading
-"            - replaced URL
-"            - reformatted the options section
-"            0.1 - 27 mar 2003
-"            - initial creation of html-enhanced php indent-file
 
-" Options: 
-let php_noindent_switch=0    " set this to '1' to not try to indent switch/case statements
-set sw=3                     " default shiftwidth of 3 spaces
+" Description:	html indenter
+" Author:	Johannes Zellner <johannes@zellner.org>
+" Last Change:	Mo, 05 Jun 2006 22:32:41 CEST
+" 		Restoring 'cpo' and 'ic' added by Bram 2006 May 5
+" Globals:	g:html_indent_tags	   -- indenting tags
+"		g:html_indent_strict       -- inhibit 'O O' elements
+"		g:html_indent_strict_table -- inhibit 'O -' elements
 
+" Only load this indent file when no other was loaded.
+"if exists("b:did_indent")
+    "finish
+"endif
+"let b:did_indent = 1
 
-if exists("b:did_indent")
-	finish
-endif
-let b:did_indent = 1
-
-setlocal indentexpr=GetPhpIndent()
-"setlocal indentkeys+=0=,0),=EO
-setlocal indentkeys+=0=,0),=EO,o,O,*<Return>,<>>,<bs>,{,}
-
-" Only define the function once.
-if exists("*GetPhpIndent")
-	finish
+if exists("g:js_indent") 
+	so g:js_indent
+else 
+	ru! indent/javascript.vim
 endif
 
-" Handle option(s)
-if exists("php_noindent_switch")
-	let b:php_noindent_switch=1
-endif
-
-if exists('g:html_indent_tags')
-	unlet g:html_indent_tags
-endif
-
-function GetPhpIndent()
-    " Find a non-empty line above the current line.
-	let lnum = prevnonblank(v:lnum - 1)
-
-	" Hit the start of the file, use zero indent.
-	if lnum == 0
-	    return 0
-	endif
-
-	let line = getline(lnum)    " last line
-	let cline = getline(v:lnum) " current line
-	let pline = getline(lnum - 1) " previous to last line
-	let ind = indent(lnum)
-
-	let restore_ic=&ic
-	let &ic=1 " ignore case
-
-	let ind = <SID>HtmlIndentSum(lnum, -1)
-	let ind = ind + <SID>HtmlIndentSum(v:lnum, 0)
-
-	let &ic=restore_ic
-	
-	let ind = indent(lnum) + (&sw * ind)
-
-	" Indent after php open tags 
-	if line =~ '<?php' && line !~ '?>'
-		let ind = ind + &sw
-	endif
-	if cline =~ '^\s*[?>]' " // Fix from Holger Dzeik <dzeik@nentec.de> Thanks!
-		let ind = ind - &sw
-	endif
-
-
-	if exists("b:php_noindent_switch") " version 1 behavior, diy switch/case,etc
-		" Indent blocks enclosed by {} or ()
-		if line =~ '[{(]\s*\(#[^)}]*\)\=$'
-			let ind = ind + &sw
-		endif
-		if cline =~ '^\s*[)}]'
-			let ind = ind - &sw
-		endif
-		return ind
-	else " Try to indent switch/case statements as well
-		" Indent blocks enclosed by {} or () or case statements, with some anal requirements
-		if line =~ 'case.*:\|[{(]\s*\(#[^)}]*\)\=$'
-			let ind = ind + &sw
-			" return if the current line is not another case statement of the previous line is a bracket open
-			if cline !~ '.*case.*:\|default:' || line =~ '[{(]\s*\(#[^)}]*\)\=$'
-				return ind
-			endif
-		endif
-		if cline =~ '^\s*case.*:\|^\s*default:\|^\s*[)}]'
-			let ind = ind - &sw
-			" if the last line is a break or return, or the current line is a close bracket,
-			" or if the previous line is a default statement, subtract another
-			if line =~ '^\s*break;\|^\s*return\|' && cline =~ '^\s*[)}]' && pline =~ 'default:'
-				let ind = ind - &sw
-			endif
-		endif
-
-		if line =~ 'default:'
-			let ind = ind + &sw
-		endif
-		return ind
-	endif
-endfunction
+echo "Sourcing html indent"
 
 
 " [-- local settings (must come before aborting the script) --]
-"setlocal indentexpr=HtmlIndentGet(v:lnum)
-"setlocal indentkeys=o,O,*<Return>,<>>,<bs>,{,}
+setlocal indentexpr=HtmlIndentGetter(v:lnum)
+setlocal indentkeys=o,O,*<Return>,<>>,{,}
 
 
+if exists('g:html_indent_tags')
+    unlet g:html_indent_tags
+endif
 
 " [-- helper function to assemble tag list --]
 fun! <SID>HtmlIndentPush(tag)
@@ -178,7 +85,7 @@ call <SID>HtmlIndentPush('noscript')
 call <SID>HtmlIndentPush('object')
 call <SID>HtmlIndentPush('ol')
 call <SID>HtmlIndentPush('optgroup')
-call <SID>HtmlIndentPush('pre')
+" call <SID>HtmlIndentPush('pre')
 call <SID>HtmlIndentPush('q')
 call <SID>HtmlIndentPush('s')
 call <SID>HtmlIndentPush('samp')
@@ -219,20 +126,21 @@ endif
 
 delfun <SID>HtmlIndentPush
 
+let s:cpo_save = &cpo
 set cpo-=C
 
 " [-- count indent-increasing tags of line a:lnum --]
-fun! <SID>HtmlIndentOpen(lnum)
+fun! <SID>HtmlIndentOpen(lnum, pattern)
     let s = substitute('x'.getline(a:lnum),
-    \ '.\{-}\(\(<\)\('.g:html_indent_tags.'\)\>\)', "\1", 'g')
+    \ '.\{-}\(\(<\)\('.a:pattern.'\)\>\)', "\1", 'g')
     let s = substitute(s, "[^\1].*$", '', '')
     return strlen(s)
 endfun
 
 " [-- count indent-decreasing tags of line a:lnum --]
-fun! <SID>HtmlIndentClose(lnum)
+fun! <SID>HtmlIndentClose(lnum, pattern)
     let s = substitute('x'.getline(a:lnum),
-    \ '.\{-}\(\(<\)/\('.g:html_indent_tags.'\)\>>\)', "\1", 'g')
+    \ '.\{-}\(\(<\)/\('.a:pattern.'\)\>>\)', "\1", 'g')
     let s = substitute(s, "[^\1].*$", '', '')
     return strlen(s)
 endfun
@@ -251,8 +159,8 @@ endfun
 fun! <SID>HtmlIndentSum(lnum, style)
     if a:style == match(getline(a:lnum), '^\s*</')
 	if a:style == match(getline(a:lnum), '^\s*</\<\('.g:html_indent_tags.'\)\>')
-	    let open = <SID>HtmlIndentOpen(a:lnum)
-	    let close = <SID>HtmlIndentClose(a:lnum)
+	    let open = <SID>HtmlIndentOpen(a:lnum, g:html_indent_tags)
+	    let close = <SID>HtmlIndentClose(a:lnum, g:html_indent_tags)
 	    if 0 != open || 0 != close
 		return open - close
 	    endif
@@ -260,7 +168,7 @@ fun! <SID>HtmlIndentSum(lnum, style)
     endif
     if '' != &syntax &&
 	\ synIDattr(synID(a:lnum, 1, 1), 'name') =~ '\(css\|java\).*' &&
-	\ synIDattr(synID(a:lnum, strlen(getline(a:lnum)) - 1, 1), 'name')
+	\ synIDattr(synID(a:lnum, strlen(getline(a:lnum)), 1), 'name')
 	\ =~ '\(css\|java\).*'
 	if a:style == match(getline(a:lnum), '^\s*}')
 	    return <SID>HtmlIndentOpenAlt(a:lnum) - <SID>HtmlIndentCloseAlt(a:lnum)
@@ -269,4 +177,78 @@ fun! <SID>HtmlIndentSum(lnum, style)
     return 0
 endfun
 
-" vim: set ts=3 sw=3:
+fun! HtmlIndentGetter(lnum)
+	
+	echo "Grabbing html indent for line: " . a:lnum
+    " Find a non-empty line above the current line.
+    let lnum = prevnonblank(a:lnum - 1)
+
+    " Hit the start of the file, use zero indent.
+    if lnum == 0
+	return 0
+    endif
+
+    let restore_ic = &ic
+    setlocal ic " ignore case
+
+    " [-- special handling for <pre>: no indenting --]
+    if getline(a:lnum) =~ '\c</pre>'
+		\ || 0 < searchpair('\c<pre>', '', '\c</pre>', 'nWb')
+		\ || 0 < searchpair('\c<pre>', '', '\c</pre>', 'nW')
+	" we're in a line with </pre> or inside <pre> ... </pre>
+	if restore_ic == 0
+	  setlocal noic
+	endif
+	return -1
+    endif
+
+    " [-- special handling for <javascript>: use cindent --]
+    let js = '<script.*type\s*=.*javascript'
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " by Tye Zdrojewski <zdro@yahoo.com>, 05 Jun 2006
+    " ZDR: This needs to be an AND (we are 'after the start of the pair' AND
+    "      we are 'before the end of the pair').  Otherwise, indentation
+    "      before the start of the script block will be affected; the end of
+    "      the pair will still match if we are before the beginning of the
+    "      pair.
+    "
+    if   0 < searchpair(js, '', '</script>', 'nWb')
+    \ && 0 < searchpair(js, '', '</script>', 'nW')
+	" we're inside javascript
+	
+	if getline(lnum) !~ js && getline(a:lnum) !~ '</script>'
+	    if restore_ic == 0
+	      setlocal noic
+	    endif	
+		return GetJsIndent(a:lnum)
+	endif
+    endif
+
+    if getline(lnum) =~ '\c</pre>'
+	" line before the current line a:lnum contains
+	" a closing </pre>. --> search for line before
+	" starting <pre> to restore the indent.
+	let preline = prevnonblank(search('\c<pre>', 'bW') - 1)
+	if preline > 0
+	    if restore_ic == 0
+	      setlocal noic
+	    endif
+	    return indent(preline)
+	endif
+    endif
+
+    let ind = <SID>HtmlIndentSum(lnum, -1)
+    let ind = ind + <SID>HtmlIndentSum(a:lnum, 0)
+
+    if restore_ic == 0
+	setlocal noic
+    endif
+
+    return indent(lnum) + (&sw * ind)
+endfun
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
+
+" [-- EOF <runtime>/indent/html.vim --]
