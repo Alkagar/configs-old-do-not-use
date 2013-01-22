@@ -7,3 +7,5 @@
 	tool = vimdiff
 [github]
 	user = alkagar
+[core]
+	editor = vim
