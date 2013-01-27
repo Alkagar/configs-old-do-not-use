@@ -132,8 +132,11 @@
     let g:yankring_min_element_length = 5 
     let g:yankring_enabled = 1
     " Indent-Guides
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
+    let g:indent_guides_start_level = 1
+    let g:indent_guides_guide_size = 4
+    let g:indent_guides_auto_colors = 0
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=233
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=235
 " ## Plugin configuration
 
 " ## Snippets, move to other file with all snippets
