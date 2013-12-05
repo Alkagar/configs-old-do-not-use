@@ -20,9 +20,10 @@
         let mapleader = " "
 
         " Copy to system clipboard
-        vmap <F7> :!xclip -f -sel clip<CR>
+        " not working if you got no xclip, and dont' work via putty
+        " vmap <F7> :!xclip -f -sel clip<CR>
         " Paste from system clipboard
-        nmap <F8> :r!xclip -o -sel clip<CR>
+        " nmap <F8> :r!xclip -o -sel clip<CR>
 
         map <Leader>fw :%s/\s\+$//e<CR>
 
@@ -125,6 +126,13 @@
         " disable because it's too slow!!
         "let php_folding = 2 
     " ## END Folding
+
+    " ## Tags setup
+        nmap <F8> :TagbarToggle<CR>
+        set tags=~/.vim/tags/ibody,~/.vim/tags/yii
+        let g:SuperTabDefaultCompletionType = "context"
+    " ## END Tags setup
+
 " ## END IDE
 
 " ## Plugin configuration
@@ -165,3 +173,7 @@
     " Disable highlighting the line with cursor to speed up vim
     " set nocursorline
     " set nocursorcolumn
+    "
+    "
+
+
