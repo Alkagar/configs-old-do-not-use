@@ -7,9 +7,9 @@ if [ -f ~/.bash_specific ]; then
     . ~/.bash_specific
 fi
 
-export LANG='pl_PL.UTF-8'
-export LC_ALL='pl_PL.UTF-8'
-export LC_CTYPE='pl_PL.UTF-8'
+export LANG='pl_PL'
+export LC_ALL='pl_PL'
+export LC_CTYPE='pl_PL'
 
 #defined colors
 colorEnd="\[\e[1;31m\]";
@@ -33,4 +33,6 @@ PS1="${greenStart} in [ \w ] ${noStart} \n[ ${redStart}\u${noStart} @ ${yellowSt
 #Light Gray  0;37     White         1;37
 
 
-source /etc/bash_completion.d/git
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
