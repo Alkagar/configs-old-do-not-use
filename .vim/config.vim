@@ -12,6 +12,9 @@
 
     " Set colorsheme
     colorscheme railscasts
+
+    " Disable toolbar by default
+    set guioptions -=T
 " ## END General settings
 
 " ## General mappings
@@ -92,6 +95,7 @@
 
         " Change home binding
         nmap 0 ^
+        vmap 0 ^
         nmap - $
     " ## END Moving around
 " ## ENDGeneral mappings
