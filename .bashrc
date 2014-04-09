@@ -7,10 +7,6 @@ if [ -f ~/.bash_specific ]; then
     . ~/.bash_specific
 fi
 
-export LANG='pl_PL'
-export LC_ALL='pl_PL'
-export LC_CTYPE='pl_PL'
-
 #defined colors
 colorEnd="\[\e[1;31m\]";
 noStart="\[\033[0m\]";
