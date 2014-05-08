@@ -97,6 +97,9 @@
         nmap 0 ^
         vmap 0 ^
         nmap - $
+
+        " Scroll screen 4 lines before end
+        set scrolloff=4
     " ## END Moving around
 " ## ENDGeneral mappings
 

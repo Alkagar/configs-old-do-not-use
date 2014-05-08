@@ -32,3 +32,5 @@ PS1="${greenStart} in [ \w ] ${noStart} \n[ ${redStart}\u${noStart} @ ${yellowSt
 if [ -f ~/.git-completion.bash ]; then
     . ~/.git-completion.bash
 fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
