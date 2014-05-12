@@ -14,7 +14,7 @@
     colorscheme railscasts
 
     " Disable toolbar by default
-    set guioptions -=T
+    " set guioptions -=T
 " ## END General settings
 
 " ## General mappings
