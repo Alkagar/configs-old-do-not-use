@@ -11,7 +11,8 @@
     "set cursorline "this one slow down vim with syntax highlightning
 
     " Set colorsheme
-    colorscheme railscasts
+    colorscheme jellybeans
+    "colorscheme railscasts
 
     " Disable toolbar by default
     " set guioptions -=T
@@ -45,7 +46,7 @@
         " remove quotes from a word
         nnoremap <Leader>qr :silent! normal mpeld bhd `ph<CR>
     " ## END Mapping
-    
+
     " ## PHP bindings
         " save and execute
         autocmd FileType php noremap <Leader>pe :w!<CR>:!php5 %:p<CR>
@@ -153,8 +154,8 @@
     let g:yankring_min_element_length = 5 
     let g:yankring_enabled = 1
     " Indent-Guides
-    let g:indent_guides_start_level = 1
-    let g:indent_guides_guide_size = 4
+    let g:indent_guides_start_level = 2
+    let g:indent_guides_guide_size = 1
     let g:indent_guides_auto_colors = 0
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=233
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=235
@@ -165,12 +166,6 @@
     iabbr prfunction private function _name()<CR>{<CR>}<CR> 
 " ## END Snippets, move to other file with all snippets
 
-" Add to erk.vim 
-" Simple SVN bindings 
-    map <Leader>svs :! svn status<CR>
-    nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
-    nnoremap <Leader>svr :! svn revert <c-r><c-a> 
-    nnoremap <Leader>svu :! uploadFile <c-r><c-a> 
 
 " ## Old config wait to be removed
     " enable php completition
@@ -187,7 +182,12 @@
     " set nocursorline
     " set nocursorcolumn
     "
-    "
+    " Add to erk.vim 
+    " Simple SVN bindings 
+        "map <Leader>svs :! svn status<CR>
+        "nnoremap <Leader>svd :! svn diff <c-r><c-a> <Bar> colordiff <Bar> less -R <CR>
+        "nnoremap <Leader>svr :! svn revert <c-r><c-a>
+        "nnoremap <Leader>svu :! uploadFile <c-r><c-a>
 
 "Dont run messdetector on save (default = 1)
 let g:phpqa_messdetector_autorun = 0
@@ -197,3 +197,16 @@ let g:phpqa_codesniffer_autorun = 0
 
 
 autocmd FileType javascript setlocal equalprg=js-beautify\ -f\ -
+
+
+
+" ## Testing part 
+"  when checked and accepted move to above configuration
+
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>ch :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set list
+set listchars=tab:▸\ ,trail:-,eol:¬
