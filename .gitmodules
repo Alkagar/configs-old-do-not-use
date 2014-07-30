@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/vim-javascript-syntax"]
 	path = .vim/bundle/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule ".vim/bundle/vim-jshint"]
+	path = .vim/bundle/vim-jshint
+	url = https://github.com/walm/jshint.vim.git
