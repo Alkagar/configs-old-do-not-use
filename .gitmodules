@@ -10,3 +10,12 @@
 [submodule ".vim/bundle/vim-javascript-syntax"]
 	path = .vim/bundle/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule ".vim/bundle/vim-jshint"]
+	path = .vim/bundle/vim-jshint
+	url = https://github.com/walm/jshint.vim.git
+[submodule ".vim/bundle/vim-phpcomplete"]
+	path = .vim/bundle/vim-phpcomplete
+	url = https://github.com/shawncplus/phpcomplete.vim.git
+[submodule ".vim/bundle/vim-phpqa"]
+	path = .vim/bundle/vim-phpqa
+	url = https://github.com/joonty/vim-phpqa.git
