@@ -36,7 +36,7 @@
         " open ctrlp
         nnoremap <Leader>s :CtrlP<CR>
         " open file explorer
-        map <Leader>f :e %:p:h<CR>
+        map <Leader>f :e %:p:h/<CR>
         " map something to closing netrw
 
         " single quote a word
@@ -126,11 +126,12 @@
         set backupdir=~/.vim/backup/
         set directory=~/.vim/backup/
 
+        map <leader>pp "+p
         " set default register for system clipboard
         "set clipboard=unnamed
-        if has('unnamedplus')
-            set clipboard=unnamed,unnamedplus
-        endif
+        "if has('unnamedplus')
+            "set clipboard=unnamed
+        "endif
     " ## END Settings
 
     " ## Folding
@@ -202,7 +203,8 @@ autocmd FileType javascript setlocal equalprg=js-beautify\ -f\ -
 
 " ## Testing part 
 "  when checked and accepted move to above configuration
-
+set hlsearch
+map <leader>hh b"sywbb/<C-R>"<CR>
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>ch :set list!<CR>
