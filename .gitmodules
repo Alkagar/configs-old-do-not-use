@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/vim-phpqa"]
 	path = .vim/bundle/vim-phpqa
 	url = https://github.com/joonty/vim-phpqa.git
+[submodule ".vim/bundle/vim-fugitive"]
+	path = .vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
