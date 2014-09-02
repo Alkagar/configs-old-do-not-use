@@ -11,8 +11,8 @@
     "set cursorline "this one slow down vim with syntax highlightning
 
     " Set colorsheme
-    colorscheme jellybeans
-    "colorscheme railscasts
+    "colorscheme jellybeans
+    colorscheme railscasts
 
     " Disable toolbar by default
     " set guioptions -=T
@@ -207,8 +207,3 @@ set hlsearch
 map <leader>hh b"sywbb/<C-R>"<CR>
 
 " Shortcut to rapidly toggle `set list`
-nmap <leader>ch :set list!<CR>
-
-" Use the same symbols as TextMate for tabstops and EOLs
-set list
-set listchars=tab:▸\ ,trail:-,eol:¬
