@@ -207,3 +207,11 @@ set hlsearch
 map <leader>hh b"sywbb/<C-R>"<CR>
 
 " Shortcut to rapidly toggle `set list`
+
+if has("autocmd")
+    " Enable file type detection
+    filetype on
+
+    " Syntax of these languages is fussy over tabs Vs spaces
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+endif
